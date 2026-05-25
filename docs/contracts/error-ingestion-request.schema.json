@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stratego/contracts/error-ingestion-request.schema.json",
+  "title": "Stratego Error Ingestion Request",
+  "type": "object",
+  "required": ["events"],
+  "additionalProperties": false,
+  "properties": {
+    "events": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "$ref": "./error-ingestion-event.schema.json"
+      }
+    }
+  }
+}

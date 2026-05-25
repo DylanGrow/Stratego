@@ -1,0 +1,8 @@
+name = "stratego-backend"
+main = "src/index.ts"
+compatibility_date = "2026-05-25"
+
+[[kv_namespaces]]
+binding = "STRATEGO_SESSIONS"
+id = "your-kv-id"
+preview_id = "your-preview-kv-id"

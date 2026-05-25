@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stratego/contracts/error-ingestion-event.schema.json",
+  "title": "Stratego Error Ingestion Event",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "eventId",
+    "occurredAt",
+    "source",
+    "release",
+    "error"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "eventId": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source": {
+      "type": "string",
+      "enum": ["window.error", "window.unhandledrejection", "manual"]
+    },
+    "release": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "requestUrl": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "userAgent": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "error": {
+      "type": "object",
+      "required": ["message"],
+      "additionalProperties": false,
+      "properties": {
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "stack": {
+          "type": "string",
+          "maxLength": 20000
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}
