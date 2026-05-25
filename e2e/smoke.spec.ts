@@ -32,7 +32,7 @@ async function performFirstLegalHumanMove(page: Page): Promise<boolean> {
 }
 
 test('startup smoke: app renders board and controls', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('./');
 
   await expect(page.getByRole('heading', { name: 'Stratego' })).toBeVisible();
   await expect(page.locator('button[aria-label^="Board cell"]')).toHaveCount(100);
@@ -41,7 +41,7 @@ test('startup smoke: app renders board and controls', async ({ page }) => {
 });
 
 test('move flow smoke: human move increments move counter', async ({ page }) => {
-  await page.goto('/?debug=1');
+  await page.goto('./?debug=1');
 
   await page.getByRole('button', { name: 'AI: ON' }).click();
   const moved = await performFirstLegalHumanMove(page);
@@ -52,7 +52,7 @@ test('move flow smoke: human move increments move counter', async ({ page }) => 
 });
 
 test('ai turn smoke: AI responds after player move', async ({ page }) => {
-  await page.goto('/?debug=1');
+  await page.goto('./?debug=1');
 
   const moved = await performFirstLegalHumanMove(page);
   expect(moved).toBeTruthy();
@@ -62,7 +62,7 @@ test('ai turn smoke: AI responds after player move', async ({ page }) => {
 });
 
 test('crash fallback smoke: forced render crash shows recovery UI', async ({ page }) => {
-  await page.goto('/?debug=1&forceRenderCrash=1');
+  await page.goto('./?debug=1&forceRenderCrash=1');
 
   await expect(page.getByRole('heading', { name: 'Stratego encountered an error' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Reset Saved State' })).toBeVisible();
