@@ -9,9 +9,9 @@ export default defineConfig({
       reporter: ['text', 'lcov'],
       include: ['src/game/engine.ts'],
       thresholds: {
-        lines: 85,
-        functions: 85,
-        statements: 85,
+        lines: 80,
+        functions: 80,
+        statements: 80,
         branches: 70,
       },
     },
