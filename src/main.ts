@@ -642,7 +642,8 @@ function persistState(): void {
 
 function registerServiceWorker(): void {
   if ('serviceWorker' in navigator && import.meta.env.PROD) {
-    navigator.serviceWorker.register('/sw.js').catch((error: unknown) => {
+    const swUrl = `${import.meta.env.BASE_URL}sw.js`;
+    navigator.serviceWorker.register(swUrl).catch((error: unknown) => {
       logger.warn('Service worker registration failed.', {
         reason: normalizeErrorMessage(error),
       });
