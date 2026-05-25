@@ -139,7 +139,9 @@ class SoundEffects {
       osc2.start(now);
       osc1.stop(now + 0.28);
       osc2.stop(now + 0.28);
-    } catch {}
+    } catch {
+      // AudioContext might not be allowed to start yet
+    }
   }
 
   playExplosion(): void {
@@ -174,7 +176,9 @@ class SoundEffects {
 
       noiseNode.start(now);
       noiseNode.stop(now + 0.65);
-    } catch {}
+    } catch {
+      // AudioContext might not be allowed to start yet
+    }
   }
 
   playVictory(): void {
@@ -205,7 +209,9 @@ class SoundEffects {
         osc.start(noteStart);
         osc.stop(noteStart + 0.25);
       });
-    } catch {}
+    } catch {
+      // AudioContext might not be allowed to start yet
+    }
   }
 
   playDefeat(): void {
@@ -229,7 +235,9 @@ class SoundEffects {
 
       osc.start(now);
       osc.stop(now + 0.45);
-    } catch {}
+    } catch {
+      // AudioContext might not be allowed to start yet
+    }
   }
 }
 
@@ -287,19 +295,19 @@ function createSetupInitialState(): GameState {
 }
 
 let state: GameState = loadState() ?? createSetupInitialState();
-let playerColor: PlayerColor = 'red';
+const playerColor: PlayerColor = 'red';
 let setupMode: boolean = !hasRedPieces(state.board);
 let activeTheme: 'classic' | 'cyber' | 'retro' = 'classic';
 let selectedBenchPiece: PieceKind | null = null;
 let selectedBenchIndex: number = -1;
 let setupBench: PieceKind[] = [];
-let undoStack: GameState[] = [];
+const undoStack: GameState[] = [];
 let isAiThinking: boolean = false;
 
 /* --- Premium Upgrades State & Helpers --- */
 let aiDifficulty: 'recruit' | 'commander' = 'commander';
 let turnTimer: number = 45;
-let isTimerEnabled: boolean = true;
+const isTimerEnabled: boolean = true;
 let lastAppliedMove: Move | null = null;
 let playerAvatar: string = localStorage.getItem('stratego_avatar') || '🎖️';
 
@@ -309,7 +317,7 @@ let activeLakeLayout: 'classic' | 'island' | 'river' = 'classic';
 let aiPersonality: 'balanced' | 'rusher' | 'turtler' = 'balanced';
 let isHeroAbilityUsed: boolean = false;
 let promotionsMap: Record<string, number> = {};
-let battleLocations: Record<string, number> = JSON.parse(localStorage.getItem('stratego_heatmap') || '{}');
+const battleLocations: Record<string, number> = JSON.parse(localStorage.getItem('stratego_heatmap') || '{}');
 let isHeatmapEnabled: boolean = false;
 
 function recordBattleClash(row: number, col: number): void {
