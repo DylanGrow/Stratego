@@ -30,6 +30,21 @@ import {
   type LogEvent,
 } from './observability/logger';
 
+const PIECE_SYMBOLS: Readonly<Record<PieceKind, string>> = {
+  flag: '🚩',
+  bomb: '💣',
+  marshal: '👑',
+  general: '⭐',
+  colonel: '🦅',
+  major: '🎖️',
+  captain: '⚓',
+  lieutenant: '🗡️',
+  sergeant: '🎗️',
+  miner: '⛏️',
+  scout: '🏹',
+  spy: '🕵️',
+};
+
 const STORAGE_KEY = 'stratego-local-state-v1';
 
 const runtime = readRuntimeConfig();
@@ -665,20 +680,7 @@ function pieceLabel(kind: PieceKind): string {
   return labels[kind];
 }
 
-const PIECE_SYMBOLS: Readonly<Record<PieceKind, string>> = {
-  flag: '🚩',
-  bomb: '💣',
-  marshal: '👑',
-  general: '⭐',
-  colonel: '🦅',
-  major: '🎖️',
-  captain: '⚓',
-  lieutenant: '🗡️',
-  sergeant: '🎗️',
-  miner: '⛏️',
-  scout: '🏹',
-  spy: '🕵️',
-};
+
 
 function resolveBattleResultText(
   attacker: { kind: PieceKind; owner: PlayerColor },

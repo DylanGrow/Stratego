@@ -36,29 +36,37 @@ test('startup smoke: app renders board and controls', async ({ page }) => {
 
   await expect(page.getByRole('heading', { name: 'Stratego' })).toBeVisible();
   await expect(page.locator('button[aria-label^="Board cell"]')).toHaveCount(100);
-  await expect(page.getByRole('button', { name: 'New Game' })).toBeVisible();
+  await expect(page.getByRole('button', { name: '⚡ Auto-Fill' })).toBeVisible();
   await expect(page.getByText('Moves: 0')).toBeVisible();
 });
 
 test('move flow smoke: human move increments move counter', async ({ page }) => {
   await page.goto('./?debug=1');
 
-  await page.getByRole('button', { name: 'AI: ON' }).click();
+  // Auto-fill setup and start battle
+  await page.getByRole('button', { name: '⚡ Auto-Fill' }).click();
+  await page.getByRole('button', { name: '⚔️ START BATTLE' }).click();
+
+  await page.getByRole('button', { name: /AI Opponent/i }).click();
   const moved = await performFirstLegalHumanMove(page);
 
   expect(moved).toBeTruthy();
   await expect(page.getByText('Moves: 1')).toBeVisible();
-  await expect(page.getByText('Turn: BLUE')).toBeVisible();
+  await expect(page.getByText('Turn: BLUE', { exact: true })).toBeVisible();
 });
 
 test('ai turn smoke: AI responds after player move', async ({ page }) => {
   await page.goto('./?debug=1');
 
+  // Auto-fill setup and start battle
+  await page.getByRole('button', { name: '⚡ Auto-Fill' }).click();
+  await page.getByRole('button', { name: '⚔️ START BATTLE' }).click();
+
   const moved = await performFirstLegalHumanMove(page);
   expect(moved).toBeTruthy();
 
   await expect(page.getByText('Moves: 2')).toBeVisible({ timeout: 7_000 });
-  await expect(page.getByText('Turn: RED')).toBeVisible({ timeout: 7_000 });
+  await expect(page.getByText('Turn: RED', { exact: true })).toBeVisible({ timeout: 7_000 });
 });
 
 test('crash fallback smoke: forced render crash shows recovery UI', async ({ page }) => {

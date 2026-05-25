@@ -14,10 +14,10 @@ export default defineConfig({
         theme_color: '#111827',
         background_color: '#e2e8f0',
         display: 'standalone',
-        start_url: '/',
+        start_url: './',
         icons: [
           {
-            src: '/favicon.svg',
+            src: 'favicon.svg',
             sizes: '192x192',
             type: 'image/svg+xml',
           },
